@@ -54,7 +54,7 @@ class Client extends \Http\Client
      */
     public function get( $edge, $params = [] ) {
         $response = $this->sendRequest($this->request($edge, 'get', $params));
-        return new Response($this, $response, $additional);
+        return new Response($this, $response);
     }
 
     public function post( $edge, $params = [] ) {
