@@ -47,7 +47,7 @@ class Response implements \ArrayAccess, \IteratorAggregate, \Countable
      * @param $client
      * @param \Http\Response $response
      */
-    public function __construct( Client $client, \Http\Response $response, $additional )
+    public function __construct( Client $client, \Http\Response $response )
     {
         $this->client = $client;
         
@@ -67,8 +67,10 @@ class Response implements \ArrayAccess, \IteratorAggregate, \Countable
             $this->pages = array_map('current', $body['_links']);
         }
 
-        foreach ( $additional as $key ) {
-            if ( isset($body[$key]) ) $this->additional[$key] = $body[$key];
+        foreach ( $body as $key => $value ) {
+            if ( $key !== 'items' and $key[0] !== '_' ) {
+                $this->additional[$key] = $value;
+            }
         }
     }
 
