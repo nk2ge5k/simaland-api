@@ -49,11 +49,12 @@ class Client extends \Http\Client
     /**
      * @param $edge
      * @param array $params
+     * @param array $additional
      * @return Response
      */
-    public function get( $edge, $params = [] ) {
+    public function get( $edge, $params = [], $additional = [] ) {
         $response = $this->sendRequest($this->request($edge, 'get', $params));
-        return new Response($this, $response);
+        return new Response($this, $response, $additional);
     }
 
     public function post( $edge, $params = [] ) {

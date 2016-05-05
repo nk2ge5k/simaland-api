@@ -33,17 +33,25 @@ class Response implements \ArrayAccess, \IteratorAggregate, \Countable
      * @var 
      */
     protected $pages = [];
+    /**
+     * @var array
+     */
+    protected $additional = [];
+    /**
+     * @var mixed
+     */
+    protected $body;
     
     /**
      * Response constructor.
      * @param $client
      * @param \Http\Response $response
      */
-    public function __construct( Client $client, \Http\Response $response )
+    public function __construct( Client $client, \Http\Response $response, $additional )
     {
         $this->client = $client;
         
-        $body = json_decode($response->getBody(), TRUE);
+        $this->body = $body = json_decode($response->getBody(), TRUE);
         if ( isset($body['items']) ) {
             $this->items = $body['items'];
         }
@@ -58,6 +66,18 @@ class Response implements \ArrayAccess, \IteratorAggregate, \Countable
         if ( isset($body['_links']) ) {
             $this->pages = array_map('current', $body['_links']);
         }
+
+        foreach ( $additional as $key ) {
+            if ( isset($body[$key]) ) $this->additional[$key] = $body[$key];
+        }
+    }
+
+    /**
+     * @param $name
+     * @return mixed|null
+     */
+    public function get( $name ) {
+        return isset($this->additional[$name]) ? $this->additional[$name] : null;
     }
 
     /**
@@ -134,6 +154,14 @@ class Response implements \ArrayAccess, \IteratorAggregate, \Countable
     public function getTotalCount()
     {
         return $this->total_count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 
     /**
