@@ -39,7 +39,6 @@ class Request extends \Http\Request
         }
         
         $options[CURLOPT_CUSTOMREQUEST] = strtoupper($method);
-        var_dump($url);
         parent::__construct($url, $options);
     }
 }
