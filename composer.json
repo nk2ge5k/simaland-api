@@ -1,0 +1,18 @@
+{
+  "name" : "nk2ge5k/simaland-api",
+  "minimum-stability": "dev",
+  "autoload" : {
+    "psr-4" : {
+      "Simaland\\" : "Simaland/"
+    }
+  },
+  "require" : {
+    "nk2ge5k/http":"^1.0.0"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/nk2ge5k/http"
+    }
+  ]
+}
