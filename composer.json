@@ -6,13 +6,7 @@
       "Simaland\\" : "Simaland/"
     }
   },
-  "require" : {
-    "nk2ge5k/http":"^1.0.0"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/nk2ge5k/http"
-    }
-  ]
+  "require": {
+    "nk2ge5k/http": "^1.0"
+  }
 }
